@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha server/**/*.test.js",
+    "test-watch":"nodemon --exec \"npm test\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "expect": "^23.5.0",
     "express": "^4.16.3",
+    "mocha": "^5.2.0",
     "mongodb": "^3.1.4",
-    "mongoose": "^5.2.12"
+    "mongoose": "^5.2.12",
+    "nodemon": "^1.18.4",
+    "supertest": "^3.1.0"
   }
 }
