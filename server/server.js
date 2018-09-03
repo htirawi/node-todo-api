@@ -1,5 +1,7 @@
 // server.js file only responsible for routes
 // put space between local imports and library imports
+
+require('./config/config')
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,7 +13,7 @@ var {User} = require('./models/user');
 var{Tank} = require('./models/tank');
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // middlewarde if it's from 3rd party middleware we just access something from the library
 // if writing custom middleware it will be a function
