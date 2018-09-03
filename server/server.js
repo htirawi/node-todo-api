@@ -11,6 +11,7 @@ var {User} = require('./models/user');
 var{Tank} = require('./models/tank');
 
 var app = express();
+const port = process.env.PORT || 3000;
 
 // middlewarde if it's from 3rd party middleware we just access something from the library
 // if writing custom middleware it will be a function
@@ -78,9 +79,8 @@ app.get('/todos/:id' , (req,res) => {
   });
 });
 
-
-app.listen(3000, () => {
-  console.log('Listening to port 3000');
+app.listen(port, () => {
+  console.log(`Listening to port ${port}`);
 });
 
 module.exports={app};
