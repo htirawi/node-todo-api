@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
+var{Tank} = require('./models/tank');
 
 var app = express();
 
@@ -33,6 +34,19 @@ app.post('/todos', (req,res) => {
     res.status(400).send(error)
   })
 })
+
+
+
+// app.post('/tanks', (req,res) => {
+//   var tank = new Tank ({
+//     name: req.body.name
+//   });
+//   tank.save().then((doc) => {
+//     res.send(doc);
+//   },(error) => {
+//     res.status(200).send(error)
+//   })
+// })
 
 app.listen(3000, () => {
   console.log('Listening to port 3000');

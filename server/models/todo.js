@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 // create mongoose model
 var Todo = mongoose.model('Todo', {
-  // proprties of the model
+  // proprties of the model ( SCHEMA)
   text: {
     type: String,
     required: true,

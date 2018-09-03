@@ -4,8 +4,10 @@ const request = require('supertest');
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 
+//To make sure that database is empty before test case
+// because in our test we expect return result = 1 (expect(todos.length).toBe(1))
 beforeEach((done) => {
-  Todo.remove({}).then(() => done());
+  Todo.deleteMany({}).then(() => done());
 
 });
 
@@ -31,6 +33,7 @@ describe('POST /todos', () => {
       }).catch((err) => done(err));
     });
   });
+
   it('should not create todo with invalid body data', (done) => {
     request(app)
     .post('/todos')
