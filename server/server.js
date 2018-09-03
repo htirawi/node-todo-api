@@ -1,9 +1,9 @@
 // server.js file only responsible for routes
 // put space between local imports and library imports
-
-var express = require('express');
-var bodyParser = require('body-parser');
-var {ObjectId} = require('mongodb');
+const _ = require('lodash');
+const express = require('express');
+const bodyParser = require('body-parser');
+const {ObjectId} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
@@ -101,5 +101,32 @@ app.delete('/todos/:id', (req,res) => {
   });
 
 });
+
+
+app.patch('/todos/:id', (req,res) => {
+  var id = req.params.id;
+  var body = _.pick(req.body,['text','completed']);
+
+  if(!ObjectId.isValid(id)){
+    return res.status(404).send();
+  }
+
+  if(_.isBoolean(body.completed) && body.completed){
+    body.completedAt= new Date().getTime();
+  } else {
+    body.completed = false;
+    body.completedAt = null;
+
+  }
+
+  Todo.findByIdAndUpdate(id, {$set: body}, {new:true}).then((todo) => {
+    if(!todo){
+      return res.status(404).send();
+    }
+    res.send({todo});
+  }).catch((error) => {
+    res.status(400).send();
+  })
+})
 
 module.exports={app};
